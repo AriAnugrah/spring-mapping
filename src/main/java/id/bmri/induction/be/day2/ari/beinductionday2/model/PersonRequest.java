@@ -3,7 +3,7 @@ package id.bmri.induction.be.day2.ari.beinductionday2.model;
 public class PersonRequest {
 
     String name;
-    Integer age = 23;
+    Integer age;
 
     public PersonRequest(String name, Integer age) {
         this.name = name;

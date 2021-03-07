@@ -15,8 +15,11 @@ public class ExampleController {
     @Autowired
     PersonService personService;
 
+    //http://localhost:8080/example/v1/ari
+    //or
+    //http://localhost:8080/example/v1/ari?age=21
     @GetMapping("/{name}")
-    public ResponseEntity<String> callPerson(@PathVariable String name, Integer age) {
+    public ResponseEntity<String> callPerson(@PathVariable String name, @RequestParam(defaultValue = "23" ) Integer age) {
         return personService.callPerson(name, age);
     }
 
@@ -26,7 +29,7 @@ public class ExampleController {
     }
 
     @PostMapping("/error")
-    public ResponseEntity<String> error(){
+    public ResponseEntity<String> error() {
         return personService.error();
     }
 
