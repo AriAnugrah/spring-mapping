@@ -1,26 +1,33 @@
 package id.bmri.induction.be.day2.ari.beinductionday2.controller;
 
 
+import id.bmri.induction.be.day2.ari.beinductionday2.model.PersonRequest;
+import id.bmri.induction.be.day2.ari.beinductionday2.model.PersonRespon;
+import id.bmri.induction.be.day2.ari.beinductionday2.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/example")
+@RequestMapping("/example/v1")
 @RestController
 public class ExampleController {
 
-    @GetMapping
-    public String getString(){
-        return "Hello";
-    }
+    @Autowired
+    PersonService personService;
 
     @GetMapping("/{name}")
-    public String getString2(@RequestParam(defaultValue = "10") String age, @PathVariable String name){
-        return "hello " + name + " age " + age;
+    public ResponseEntity<String> callPerson(@PathVariable String name, Integer age) {
+        return personService.callPerson(name, age);
     }
 
-    @PostMapping("/test2")
-    public String test2(@RequestBody String name){
-        return "coba lah " + name;
+    @PostMapping("/add")
+    public ResponseEntity<PersonRespon> add(@RequestBody PersonRequest personRequest) {
+        return personService.add(personRequest);
     }
 
+    @PostMapping("/error")
+    public ResponseEntity<String> error(){
+        return personService.error();
+    }
 
 }
