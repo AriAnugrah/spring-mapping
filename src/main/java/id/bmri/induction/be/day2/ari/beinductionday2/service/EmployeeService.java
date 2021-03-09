@@ -12,6 +12,12 @@ public interface EmployeeService {
 
     List<Employees> getEmployeeList();
 
+    Employees getEmployeeByIdAndSalary(Integer id, Integer salary);
+
+    Optional<Employees> getEmployeeByNameAndSalary(String name, Integer salary);
+
+    Employees getEmployeeByFirstNameAndDepartmentName(String name);
+
 
 
 }

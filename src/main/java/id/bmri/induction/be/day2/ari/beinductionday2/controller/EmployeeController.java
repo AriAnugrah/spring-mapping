@@ -4,10 +4,7 @@ import id.bmri.induction.be.day2.ari.beinductionday2.entities.Employees;
 import id.bmri.induction.be.day2.ari.beinductionday2.model.EmployeeRespon;
 import id.bmri.induction.be.day2.ari.beinductionday2.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +40,25 @@ public class EmployeeController {
                 .build()
         ).collect(Collectors.toList());
     }
+
+
+
+
+    @GetMapping(value = "find/{id}")
+    public Employees getEmployeeIdAndSalary (@PathVariable Integer id, @RequestParam(defaultValue = "0" ) Integer salary) {
+        return employeeService.getEmployeeByIdAndSalary(id, salary);
+    }
+
+    @GetMapping(value = "name/{name}")
+    public Optional<Employees> getEmployeeNameAndSalary (@PathVariable String name, @RequestParam(defaultValue = "0" ) Integer salary) {
+        return employeeService.getEmployeeByNameAndSalary(name, salary);
+    }
+
+    @GetMapping(value = "native/{name}")
+    public Employees getEmployeeNameAndDepartment (@PathVariable String name) {
+        return employeeService.getEmployeeByFirstNameAndDepartmentName(name);
+    }
+
 
 
 }

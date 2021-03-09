@@ -17,7 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Optional<Employees> getEmployeeOptionalById(Integer id) {
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -28,6 +28,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employees> getEmployeeList() {
         return employeesRepository.findAll();
+    }
+
+    @Override
+    public Employees getEmployeeByIdAndSalary(Integer id, Integer salary){
+        return employeesRepository.getEmployeesByIdAndSalary(id,salary);
+    }
+
+    @Override
+    public Optional<Employees> getEmployeeByNameAndSalary(String name, Integer salary){
+        return employeesRepository.getEmployeesByFirstNameAndSalary(name, salary);
+    }
+
+    @Override
+    public Employees getEmployeeByFirstNameAndDepartmentName(String name){
+        return employeesRepository.getEmployeesByFirstNameAndDepartmentName(name);
     }
 
 }
