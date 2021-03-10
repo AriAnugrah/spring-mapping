@@ -43,4 +43,18 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
             "where first_name = :name")
     Employees getEmployeesByFirstNameAndDepartmentName(String name);
 
+
+
+    //right join
+    @Query(nativeQuery = true, value = "select e.first_name, d.department_name\n" +
+            "from employees e\n" +
+            "right join departments d\n" +
+            "on e.department_id = d.department_id;")
+    List<Employees> findEmployeeByDeptIdAndDeptName(Integer deptId, String deptName);
+
+
+    //full outer join
+
+    //
+
 }
