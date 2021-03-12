@@ -3,6 +3,7 @@ package id.bmri.induction.be.day2.ari.beinductionday2.repository;
 
 import id.bmri.induction.be.day2.ari.beinductionday2.entities.Employees;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -54,7 +55,11 @@ public interface EmployeesRepository extends JpaRepository<Employees, Integer> {
 
 
     //full outer join
+    @Query(nativeQuery = true, value = "SELECT d.DEPARTMENT_NAME Department, (e.FIRST_NAME || ' ' || e.LAST_NAME) Full_name FROM DEPARTMENTS d" +
+            " FULL OUTER JOIN EMPLOYEES e ON d.DEPARTMENT_ID = e.DEPARTMENT_ID WHERE e.DEPARTMENT_ID IS NULL OR d.DEPARTMENT_ID IS NULL")
+    List<Object> finEmployeeNullDepAndShowAll();
 
-    //
+    //merge
+
 
 }
